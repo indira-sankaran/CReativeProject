@@ -1,0 +1,71 @@
+---
+title: "Creative Project"
+author: '16293843'
+date: "2023-11-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+
+# Create the tree plot
+tree <- ggplot(data.frame()) +
+  geom_rect(aes(xmin = -1, xmax = 1, ymin = 0, ymax = 2), fill = "tan3", color = "tan4", size = 3) +
+  geom_polygon(aes(x = c(-5, 0, 5), y = c(2, 4, 2)), fill = "palegreen3", color = "palegreen4", size = 3) +
+  geom_polygon(aes(x = c(-4, 0, 4), y = c(3.5, 5.5, 3.5)), fill = "palegreen4", color = "palegreen3", size = 3) +
+  geom_polygon(aes(x = c(-3, 0, 3), y = c(5, 6.5, 5)), fill = "palegreen3", color = "palegreen4", size = 3) +
+  geom_polygon(aes(x = c(-2, 0, 2), y = c(6.25, 7.5, 6.25)), fill = "palegreen4", color = "palegreen3", size = 3) +
+  coord_cartesian(xlim = c(-5, 5), ylim = c(0, 10))
+
+#Create Points
+
+points_data <- data.frame(
+  x = c(-2.5, -1, 0, 2, 2.5),
+  y = c(3.5, 6.25, 5, 6.25, 2.5)
+)
+points_blue <- data.frame(
+  x = c(0, 6, 4, -2.5, 1),
+  y = c(3.25, 0, -1.5, 2.5, 2.5)
+)
+points_yellow <- data.frame(
+  x = c(-1, 0, 0.5, -0.5, -1.5),
+  y = c(4, 6.5, 5, 3, 2.5)
+)
+
+# Snow data
+snow_data <- data.frame(
+  x = runif(100, min = -5, max = 5),
+  y = runif(100, min = 0, max = 10),
+  time = sample(seq(0.5, 0.9, by = 0.01), 100, replace = TRUE)
+)
+
+# Add points and snow to the tree plot
+tree <- tree +
+  geom_point(data = points_data, aes(x = x, y = y), color = "red", size = 5) +
+  geom_point(data = points_blue, aes(x = x, y = y), color = "lightblue", size = 5) +
+  geom_point(data = points_yellow, aes(x = x, y = y), color = "yellow", size = 5) +
+  geom_point(data = data.frame(x = 0, y = 7.7), aes(x = x, y = y), color = "#e5d08f", size = 15, shape = 8) +
+  geom_point(data = snow_data, aes(x = x, y = y), color = "lightblue", size = 1, shape = 8, position = position_jitter(width = 0.5, height = 0.2)) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "black"), title = element_text(color = "white"))
+
+# Print the updated plot
+print(tree)
+
+ 
+
+
+```
+
+
